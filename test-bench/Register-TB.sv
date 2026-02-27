@@ -24,13 +24,13 @@ module Reg_TB();
 
 reg clk;
 reg reset;
-reg [8:0] input_bits;
-reg [8:0] output_bits;
+reg [7:0] input_bits;
+reg [7:0] output_bits;
 
     
     initial
     begin
-    
+        reset <= 0;
         #5 clk <= 1;
         input_bits <= 8'b01010101;
         #5 clk <= 0;

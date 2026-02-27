@@ -34,9 +34,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity ShiftRegister is
     Port ( 
-    clk: in std_logic;
-    reset: in std_logic;
-    input_bit: in std_logic;
+    clk: in std_logic := '0';
+    reset: in std_logic := '0';
+    input_bit: in std_logic := '0';
     output_bits: out std_logic_vector(7 downto 0)
     );
 end ShiftRegister;
@@ -55,6 +55,7 @@ begin
         bits_reg <= bits_next;
     end if;
 end process;
+
 
 bits_next <= bits_reg(6 downto 0) & input_bit;
 
