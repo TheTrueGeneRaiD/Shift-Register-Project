@@ -30,26 +30,35 @@ reg [7:0] output_bits;
     
     initial
     begin
+    // We need the clock to start at 0 inorder for the device 
+    // to pick up the rising edge.
+    
+    // Note: make sure to always start clocks at logic 0 to initalize before a logic 1. 
+    
         reset <= 0;
-        #5 clk <= 1;
+        clk <= 0;
+        
         input_bits <= 8'b01010101;
-        #5 clk <= 0;
-        #5 clk <= 1;
+        
+        #15 clk <= 1;
+        #15 clk <= 0;
+        
+        #15 clk <= 1;
         input_bits <= 8'b10101010;
-        #5 clk <= 0;
+        #15 clk <= 0;
         
-        #5 clk <= 1;
+        #15 clk <= 1;
         input_bits <= 8'b11111111;
-        #5 clk <= 0;
+        #15 clk <= 0;
         
         
-        #5 clk <= 1;
+        #15 clk <= 1;
         reset <= 1;
-        #5 clk <= 0;
+        #15 clk <= 0;
         
-        #5 clk <= 1;
+        #15 clk <= 1;
         reset <= 0;
-        #5 clk <= 0;
+        #15 clk <= 0;
         
     end
 

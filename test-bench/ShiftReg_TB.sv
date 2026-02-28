@@ -29,6 +29,9 @@ reg clk;
 
 initial
 begin
+reset <= 0;
+clk <= 0;
+
 
 #10 clk <= 1;
 d <= 1;

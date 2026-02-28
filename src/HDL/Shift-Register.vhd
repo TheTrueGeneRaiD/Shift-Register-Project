@@ -43,22 +43,18 @@ end ShiftRegister;
 
 architecture Behavioral of ShiftRegister is
 
-signal bits_reg: std_logic_vector(7 downto 0);
-signal bits_next: std_logic_vector(7 downto 0);
+    signal bits: STD_LOGIC_VECTOR(7 downto 0);
 
 begin
-process(clk, reset)
+process(clk, reset, bits)
 begin    
     if(reset='1') then
-        bits_reg <= (others => '0');
+        bits <= (others => '0');
     elsif(clk'event and clk='1') then
-        bits_reg <= bits_next;
+        bits <= bits(6 downto 0) & input_bit;
     end if;
 end process;
 
-
-bits_next <= bits_reg(6 downto 0) & input_bit;
-
-output_bits <= bits_reg;
+output_bits <= bits;
 
 end Behavioral;
