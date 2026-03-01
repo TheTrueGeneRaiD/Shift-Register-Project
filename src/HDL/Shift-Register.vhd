@@ -36,6 +36,7 @@ entity ShiftRegister is
     Port ( 
     clk: in std_logic := '0';
     reset: in std_logic := '0';
+    load: in std_logic := '0';
     input_bit: in std_logic := '0';
     output_bits: out std_logic_vector(7 downto 0)
     );
@@ -50,7 +51,7 @@ process(clk, reset, bits)
 begin    
     if(reset='1') then
         bits <= (others => '0');
-    elsif(clk'event and clk='1') then
+    elsif(rising_edge(clk) and load = '1') then
         bits <= bits(6 downto 0) & input_bit;
     end if;
 end process;

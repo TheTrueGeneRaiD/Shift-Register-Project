@@ -24,6 +24,7 @@ module Reg_TB();
 
 reg clk;
 reg reset;
+reg load;
 reg [7:0] input_bits;
 reg [7:0] output_bits;
 
@@ -37,6 +38,7 @@ reg [7:0] output_bits;
     
         reset <= 0;
         clk <= 0;
+        load <= 1;
         
         input_bits <= 8'b01010101;
         
@@ -44,10 +46,12 @@ reg [7:0] output_bits;
         #15 clk <= 0;
         
         #15 clk <= 1;
+        load <= 0;
         input_bits <= 8'b10101010;
         #15 clk <= 0;
         
         #15 clk <= 1;
+        load <= 1;
         input_bits <= 8'b11111111;
         #15 clk <= 0;
         
@@ -64,6 +68,7 @@ reg [7:0] output_bits;
 
     Regi DUT (.clk (clk),
              .reset (reset),
+             .load (load),
              .input_bits (input_bits),
              .output_bits (output_bits));
     

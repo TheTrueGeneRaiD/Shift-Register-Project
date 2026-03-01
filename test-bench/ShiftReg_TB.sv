@@ -24,6 +24,7 @@ module ShiftReg_TB();
 
 reg reset;
 reg d;
+reg load;
 reg [7:0] output_bits;
 reg clk;
 
@@ -31,7 +32,7 @@ initial
 begin
 reset <= 0;
 clk <= 0;
-
+load <= 1;
 
 #10 clk <= 1;
 d <= 1;
@@ -47,14 +48,17 @@ d <= 1;
 
 #10 clk <= 1;
 #10 clk <= 0;
+load <= 0;
 d <= 1;
 
 #10 clk <= 1;
 #10 clk <= 0;
+load <= 1;
 d <= 1;
 
 #10 clk <= 1;
 #10 clk <= 0;
+load <= 0;
 d <= 1;
 
 #10 clk <= 1;
@@ -69,6 +73,7 @@ end
 
 ShiftRegister DUT (.clk (clk),
                    .reset (reset),
+                   .load (load),
                    .input_bit (d),
                    .output_bits (output_bits)
                    );

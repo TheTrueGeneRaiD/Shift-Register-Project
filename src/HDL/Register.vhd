@@ -35,6 +35,7 @@ entity Regi is
     Port ( 
         clk: in std_logic;
         reset: in std_logic;
+        load: in std_logic; 
         input_bits: in std_logic_vector(7 downto 0);
         output_bits: out std_logic_vector(7 downto 0)
     );
@@ -42,13 +43,15 @@ end Regi;
 
 architecture Behavioral of Regi is
 
+signal loopback_bits: std_logic_vector(7 downto 0);
+
 begin
 
 process(clk, reset)
 begin    
-    if(reset='1') then
+    if(reset = '1') then
         output_bits <= (others => '0');
-    elsif(rising_edge(clk)) then
+    elsif(rising_edge(clk) and load = '1') then
         output_bits <= input_bits;
     end if;
 end process;
